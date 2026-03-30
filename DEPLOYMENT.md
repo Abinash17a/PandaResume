@@ -1,11 +1,17 @@
-# 🚀 Railway Deployment Guide
+# 🚀 Simplified Deployment Guide (Gemini API)
 
-## Step 1: Deploy Backend (Node.js/Express)
+## ✅ What Changed:
+- **No more Python AI service needed**
+- **Direct Gemini API integration** in Node.js backend
+- **Simpler deployment** - only need to deploy the backend
+- **Faster response times** - no service-to-service communication
+
+## Step 1: Deploy Backend (Node.js/Express Only)
 
 1. **Push to GitHub:**
    ```bash
    git add .
-   git commit -m "Add Railway deployment config"
+   git commit -m "Switch to Gemini API integration"
    git push origin main
    ```
 
@@ -19,23 +25,12 @@
 3. **Set Environment Variables:**
    - In Railway dashboard → Settings → Variables
    - Add: `NODE_ENV = production`
-   - Add: `AI_SERVICE_URL = https://your-ai-service.railway.app` (get this after step 2)
+   - Add: `GEMINI_API_KEY = AIzaSyAfZXNAm3stDQeXNbZlKe9PcpGY6slvzXU` (or your own key)
 
-## Step 2: Deploy AI Service (Python/FastAPI)
+## Step 2: Update Frontend
 
-1. **Deploy to Railway:**
-   - Click "New Project" → "Deploy from GitHub repo"
-   - Select the same repository
-   - Choose the `ai-service` folder
-   - Click "Deploy"
-
-2. **Get the URL:**
-   - Railway will give you a URL like: `https://your-ai-service.railway.app`
-
-## Step 3: Update Frontend
-
-1. **Update API URLs in frontend:**
-   - Find where you make API calls
+1. **Update API URL in frontend:**
+   - Find where you make API calls (likely in ATSModal.jsx)
    - Replace `http://localhost:5000` with your Railway backend URL
    - Example: `https://your-backend.railway.app`
 
@@ -48,28 +43,42 @@
 
 ## Environment Variables Needed
 
-### Backend:
+### Backend Only:
 - `NODE_ENV = production`
-- `AI_SERVICE_URL = https://your-ai-service.railway.app`
+- `GEMINI_API_KEY = AIzaSyAfZXNAm3stDQeXNbZlKe9PcpGY6slvzXU`
 - `PORT = 5000` (Railway sets this automatically)
-
-### AI Service:
-- `PORT = 8000` (Railway sets this automatically)
 
 ## Testing
 
 1. Test backend: `https://your-backend.railway.app/ats-check`
-2. Test AI service: `https://your-ai-service.railway.app/analyze`
-3. Test full app on Netlify
+2. Test full app on Netlify
 
 ## Cost
 
-- **Free Tier:** $0/month (both services)
-- **Limitations:** 500 hours/month, 100MB RAM
-- **Upgrade:** $5-20/month for more resources
+- **Railway Backend:** $0/month (free tier)
+- **Gemini API:** Free tier generous limits, then pay-per-use
+- **Total:** Much cheaper than running separate AI service!
+
+## Benefits of This Approach
+
+✅ **Simpler Architecture** - No Python service to manage  
+✅ **Faster Deployment** - Only one service to deploy  
+✅ **Lower Costs** - No separate hosting for AI service  
+✅ **Better Reliability** - Fewer moving parts  
+✅ **Gemini Power** - State-of-the-art AI analysis  
+✅ **Easy Scaling** - Just scale the Node.js service  
 
 ## Troubleshooting
 
-- If AI service fails: Check logs in Railway dashboard
+- If API errors: Check Gemini API key is correct
 - If CORS errors: Update the origin URL in backend
-- If 504 errors: Services might be starting up (wait 2-3 minutes)
+- If 504 errors: Service might be starting up (wait 2-3 minutes)
+- If rate limited: Gemini has generous limits but may need upgrade
+
+## 🎯 You No Longer Need:
+- ❌ Python AI service deployment
+- ❌ Docker configuration
+- ❌ Multiple service management
+- ❌ Complex service-to-service communication
+
+**Your ATS checker is now much simpler and more reliable!** 🚀
