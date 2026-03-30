@@ -279,7 +279,7 @@ function extractSkills(text) {
 
 // Generate ATS analysis using Gemini API
 async function analyzeATS(resume, jd) {
-  const apiKey = process.env.GEMINI_API_KEY || "AIzaSyAfZXNAm3stDQeXNbZlKe9PcpGY6slvzXU";
+  const apiKey = process.env.GEMINI_API_KEY;
   
   const resumeSkills = extractSkills(resume);
   const jdSkills = extractSkills(jd);
